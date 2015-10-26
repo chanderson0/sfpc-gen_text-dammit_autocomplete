@@ -78,9 +78,11 @@
           if (parts.length < 2) return;
 
           var lastWord = parts[parts.length - 2].toLowerCase();
+          var lastWordStripped = lastWord.replace(/^\s+|\s+$/g, '');
+
           var follower = 'lol';
-          if (followers_data[lastWord]) {
-            var followers = followers_data[lastWord];
+          if (followers_data[lastWordStripped]) {
+            var followers = followers_data[lastWordStripped];
             follower = followers[Math.floor(Math.random()*followers.length)];
           }
           
