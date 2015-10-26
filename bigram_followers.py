@@ -7,11 +7,17 @@ bigrams = ngrams(nltk.corpus.brown.words(), 2)
 words = defaultdict(lambda : defaultdict(int))
 
 for bigram in bigrams:
+  first_word = bigram[0].lower()
+  second_word = bigram[1].lower()
   score = 1
-  if bigram[1] in [",", ".", "!", "''"]:
-    score = 0.5
 
-  words[bigram[0].lower()][bigram[1].lower()] += score
+  if second_word == "''" or second_word == '``':
+    second_word = '"'
+
+  if second_word in [',', '.', '!', '"']:
+    score *= 0.5
+
+  words[first_word][second_word] += score
 
 common_followers = {}
 for word, followers in words.iteritems():
